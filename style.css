@@ -9,7 +9,7 @@ html {
     width: 300px;
     grid-template-columns: repeat(4, 1fr);
 }
-.output {
+.display {
     grid-column: 1/5;
     border: 1px solid black;
     text-align: right;

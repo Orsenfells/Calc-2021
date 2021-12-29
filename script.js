@@ -13,7 +13,10 @@ function multiply(a, b) {
 function divide(a, b) {
     return a / b
 }
-
+function populateDisplay(input) {
+    let display = document.querySelector('.display');
+    display.textContent += input;
+} 
 function operate(a, operator, b) {
     switch(operator) {
         case '+':
@@ -26,3 +29,5 @@ function operate(a, operator, b) {
             return divide(a, b)
     }
 }
+const calculator = document.querySelector('.calculator');
+const calculatorButtons = calculator.querySelectorAll('button')
