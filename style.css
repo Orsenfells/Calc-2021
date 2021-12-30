@@ -12,7 +12,10 @@ html {
 .display {
     grid-column: 1/5;
     border: 1px solid black;
-    text-align: right;
+    align-items: center;
+    justify-content: flex-end;
+    display: flex;
+    height: 35px
 }
 .clear, .zero {
     grid-column: 1/3;
