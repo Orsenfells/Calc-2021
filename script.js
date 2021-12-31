@@ -4,10 +4,12 @@ const operatorButtons = calculator.querySelectorAll('.operator');
 const equalButton = calculator.querySelector('.equal');
 const clear = calculator.querySelector('.clear');
 const undo = calculator.querySelector('.undo');
+const decimal = calculator.querySelector('.decimal');
 const calc = {
     prevInput: '',
     operater: '',
     currentInput: '',
+    decimalToggle: false,
     isResult: false,
 }
 function add(a, b) {
@@ -54,27 +56,29 @@ operatorButtons.forEach(button => button.addEventListener('click', (e) => {
 
     calc.prevInput = calc.currentInput
     calc.operator = operator
-
+    calc.decimalToggle = false
     calc.currentInput = ''
 }))
 equalButton.addEventListener('click', () => {
     if(!calc.currentInput || !calc.operator) {
         return
     }
-    let a = parseInt(calc.prevInput);
-    let b = parseInt(calc.currentInput);
+    let a = parseFloat(calc.prevInput);
+    let b = parseFloat(calc.currentInput);
     let operator = calc.operator;
     
     calc.currentInput = operate(a, operator, b);
     calc.isResult = true;
     populateDisplay(calc.currentInput);
     calc.operator = '';
+    calc.decimalToggle = false;
 })
 clear.addEventListener('click', () => {
     calc.prevInput = '';
     calc.operater = '';
     calc.currentInput = ''
     calc.isResult = false;
+    calc.decimalToggle = false;
     populateDisplay("0")
 })
 
@@ -82,7 +86,24 @@ undo.addEventListener('click',  () => {
     if (calc.isResult) {
         return
     }
+    if (calc.currentInput[calc.currentInput.length - 1] === '.') {
+        calc.decimalToggle = false
+    }
     calc.currentInput = calc.currentInput.slice(0, -1)
     populateDisplay(calc.currentInput)
     console.log(calc.currentInput)
+})
+decimal.addEventListener('click', () => {
+    if (calc.decimalToggle) {
+        return
+    }
+    if(calc.isResult) {
+        calc.decimalToggle = true;
+        calc.currentInput = '.'
+        calc.isResult = false
+    }else {
+        calc.decimalToggle = true
+        calc.currentInput += "."
+    }
+    populateDisplay(calc.currentInput)
 })
