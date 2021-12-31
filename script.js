@@ -1,3 +1,14 @@
+const calculator = document.querySelector('.calculator');
+const numButtons = calculator.querySelectorAll('.number');
+const operatorButtons = calculator.querySelectorAll('.operator');
+const equalButton = calculator.querySelector('.equal');
+const clear = calculator.querySelector('.clear');
+const calc = {
+    prevInput: '',
+    operater: '',
+    currentInput: '',
+    isResult: false,
+}
 function add(a, b) {
     return a + b
 }
@@ -29,16 +40,7 @@ function operate(a, operator, b) {
             return divide(a, b)
     }
 }
-const calculator = document.querySelector('.calculator');
-const numButtons = calculator.querySelectorAll('.number')
-const operatorButtons = calculator.querySelectorAll('.operator')
-const equalButton = calculator.querySelector('.equal')
-const calc = {
-    prevInput: '',
-    operater: '',
-    currentInput: '',
-    isResult: false,
-}
+
 numButtons.forEach(button => button.addEventListener('click', (e) => {
     if(calc.isResult) {
         calc.currentInput = e.target.textContent
@@ -61,9 +63,16 @@ equalButton.addEventListener('click', () => {
     let a = parseInt(calc.prevInput);
     let b = parseInt(calc.currentInput);
     let operator = calc.operator;
+    
     calc.currentInput = operate(a, operator, b);
     calc.isResult = true;
     populateDisplay(calc.currentInput);
     calc.operator = '';
-
+})
+clear.addEventListener('click', () => {
+    calc.prevInput = '';
+    calc.operater = '';
+    calc.currentInput = ''
+    calc.isResult = false;
+    populateDisplay("0")
 })
