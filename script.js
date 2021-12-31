@@ -3,6 +3,7 @@ const numButtons = calculator.querySelectorAll('.number');
 const operatorButtons = calculator.querySelectorAll('.operator');
 const equalButton = calculator.querySelector('.equal');
 const clear = calculator.querySelector('.clear');
+const undo = calculator.querySelector('.undo');
 const calc = {
     prevInput: '',
     operater: '',
@@ -75,4 +76,13 @@ clear.addEventListener('click', () => {
     calc.currentInput = ''
     calc.isResult = false;
     populateDisplay("0")
+})
+
+undo.addEventListener('click',  () => {
+    if (calc.isResult) {
+        return
+    }
+    calc.currentInput = calc.currentInput.slice(0, -1)
+    populateDisplay(calc.currentInput)
+    console.log(calc.currentInput)
 })
