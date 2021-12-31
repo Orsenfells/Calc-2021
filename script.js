@@ -15,7 +15,7 @@ function divide(a, b) {
 }
 function populateDisplay(input) {
     let display = document.querySelector('.display');
-    display.textContent += input;
+    display.textContent = input;
 } 
 function operate(a, operator, b) {
     switch(operator) {
@@ -34,26 +34,36 @@ const numButtons = calculator.querySelectorAll('.number')
 const operatorButtons = calculator.querySelectorAll('.operator')
 const equalButton = calculator.querySelector('.equal')
 const calc = {
-    operation: [],
+    prevInput: '',
+    operater: '',
     currentInput: '',
+    isResult: false,
 }
 numButtons.forEach(button => button.addEventListener('click', (e) => {
-    populateDisplay(e.target.textContent);
-    calc.currentInput += e.target.textContent;
+    if(calc.isResult) {
+        calc.currentInput = e.target.textContent
+        calc.isResult = false;
+    } else calc.currentInput += e.target.textContent;
+    populateDisplay(calc.currentInput);
 }))
 operatorButtons.forEach(button => button.addEventListener('click', (e) => {
     let operator = e.target.textContent
 
-    populateDisplay(` ${operator} `)
-    calc.operation.push(calc.currentInput, operator)
+    calc.prevInput = calc.currentInput
+    calc.operator = operator
+
     calc.currentInput = ''
 }))
 equalButton.addEventListener('click', () => {
-    if(!calc.currentInput) {
+    if(!calc.currentInput || !calc.operator) {
         return
     }
-    calc.operation.push(calc.currentInput)
-    console.log(calc.operation)
+    let a = parseInt(calc.prevInput);
+    let b = parseInt(calc.currentInput);
+    let operator = calc.operator;
+    calc.currentInput = operate(a, operator, b);
+    calc.isResult = true;
+    populateDisplay(calc.currentInput);
+    calc.operator = '';
 
-    calc.operation.find()
 })
