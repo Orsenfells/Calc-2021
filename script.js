@@ -5,6 +5,7 @@ const equalButton = calculator.querySelector('.equal');
 const clear = calculator.querySelector('.clear');
 const undo = calculator.querySelector('.undo');
 const decimal = calculator.querySelector('.decimal');
+let display = document.querySelector('.display');
 const calc = {
     prevInput: '',
     operater: '',
@@ -28,7 +29,7 @@ function divide(a, b) {
     return a / b
 }
 function populateDisplay(input) {
-    let display = document.querySelector('.display');
+
     display.textContent = input;
 } 
 function operate(a, operator, b) {
@@ -45,6 +46,9 @@ function operate(a, operator, b) {
 }
 
 numButtons.forEach(button => button.addEventListener('click', (e) => {
+    if(calc.currentInput === '0') {
+        calc.currentInput = ''
+    }
     if(calc.isResult) {
         calc.currentInput = e.target.textContent
         calc.isResult = false;
