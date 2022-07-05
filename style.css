@@ -7,7 +7,11 @@ html {
 .calculator {
     display: grid;
     width: 300px;
+    height: 500px;
     grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin: 0 auto;
+    margin-top: 40px;
 }
 .display {
     grid-column: 1/5;
@@ -15,7 +19,40 @@ html {
     align-items: center;
     justify-content: flex-end;
     display: flex;
-    height: 35px
+    font-size: 50px;
+    font-family: 'Roboto', sans-serif;
+    padding-right: 20px;
+    border-radius: 8px;
+}
+.clear {
+    background-color: red;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+.equal {
+ background-color: #990011FF;
+}
+.decimal {
+    background-color: #990011FF;
+}
+.undo {
+    background-color: #990011FF;
+}
+.button {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.operator {
+    background-color: #990011FF;
+    
+}
+.number {
+    background-color: #FCF6F5FF;
+    color: black;
 }
 .clear, .zero {
     grid-column: 1/3;
